@@ -42,6 +42,10 @@ def main(args):
         with open(logfile, 'w') as f:
             f.write('Epoch\tTrain\tValidation\n')
 
+    if args.use_wandb:
+        import wandb
+        wandb.init(project=args.wandb_project, entity=args.wandb_entity or None, name=args.wandb_run_name or None, config=vars(args))
+
     data_path = args.path_for_training_data
     params = {
         "LIST"    : f"{data_path}/list.csv", 
@@ -201,7 +205,18 @@ def main(args):
             with open(logfile, 'a') as f:
                 f.write(f'epoch: {e+1}, step: {total_step}, time: {dt}, train: {train_perplexity_}, valid: {validation_perplexity_}, train_acc: {train_accuracy_}, valid_acc: {validation_accuracy_}\n')
             print(f'epoch: {e+1}, step: {total_step}, time: {dt}, train: {train_perplexity_}, valid: {validation_perplexity_}, train_acc: {train_accuracy_}, valid_acc: {validation_accuracy_}')
-            
+
+            if args.use_wandb:
+                wandb.log({
+                    'epoch': e+1,
+                    'train_loss': train_loss,
+                    'train_perplexity': train_perplexity,
+                    'train_accuracy': train_accuracy,
+                    'validation_loss': validation_loss,
+                    'validation_perplexity': validation_perplexity,
+                    'validation_accuracy': validation_accuracy,
+                }, step=total_step)
+
             checkpoint_filename_last = base_folder+'model_weights/epoch_last.pt'.format(e+1, total_step)
             torch.save({
                         'epoch': e+1,
@@ -246,6 +261,10 @@ if __name__ == "__main__":
     argparser.add_argument("--debug", type=bool, default=False, help="minimal data loading for debugging")
     argparser.add_argument("--gradient_norm", type=float, default=-1.0, help="clip gradient norm, set to negative to omit clipping")
     argparser.add_argument("--mixed_precision", type=bool, default=True, help="train with mixed precision")
- 
+    argparser.add_argument("--use_wandb", action="store_true", help="log training/validation loss to Weights & Biases")
+    argparser.add_argument("--wandb_project", type=str, default="proteinmpnn", help="wandb project name")
+    argparser.add_argument("--wandb_run_name", type=str, default="", help="wandb run name (default: auto-generated)")
+    argparser.add_argument("--wandb_entity", type=str, default="", help="wandb entity (username or org) to log runs under, e.g. aviba or aviba-the-university-of-texas-at-austin-org")
+
     args = argparser.parse_args()    
     main(args)   

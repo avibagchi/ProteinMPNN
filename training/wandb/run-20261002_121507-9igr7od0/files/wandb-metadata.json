@@ -1,0 +1,72 @@
+{
+  "os": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+  "python": "CPython 3.10.21",
+  "startedAt": "2026-10-02T17:15:07.720813Z",
+  "args": [
+    "--path_for_training_data",
+    "/hdd1/avb985/pdb_2021aug02",
+    "--path_for_outputs",
+    "/hdd1/avb985/exp_021",
+    "--use_wandb",
+    "--wandb_project",
+    "proteinmpnn",
+    "--wandb_run_name",
+    "exp_021"
+  ],
+  "program": "/home/avb985/ProteinMPNN/training/training.py",
+  "codePath": "training/training.py",
+  "codePathLocal": "training.py",
+  "git": {
+    "remote": "https://github.com/avibagchi/ProteinMPNN.git",
+    "commit": "8907e6671bfbfc92303b5f79c4b5e6ce47cdef57"
+  },
+  "email": "aviba@utexas.edu",
+  "root": "/home/avb985/ProteinMPNN/training",
+  "host": "ecen-a86554",
+  "executable": "/hdd1/avb985/envs/mpnn/bin/python",
+  "cpu_count": 64,
+  "cpu_count_logical": 128,
+  "gpu": "NVIDIA H100 NVL",
+  "gpu_count": 4,
+  "disk": {
+    "/": {
+      "total": "105089261568",
+      "used": "59531501568"
+    }
+  },
+  "memory": {
+    "total": "811277496320"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA H100 NVL",
+      "memoryTotal": "100485038080",
+      "cudaCores": 16896,
+      "architecture": "Hopper",
+      "uuid": "GPU-599d8740-a45a-4551-fc31-058dcef61295"
+    },
+    {
+      "name": "NVIDIA H100 NVL",
+      "memoryTotal": "100485038080",
+      "cudaCores": 16896,
+      "architecture": "Hopper",
+      "uuid": "GPU-3755249b-3d46-d1c0-fd84-5913e1c45018"
+    },
+    {
+      "name": "NVIDIA H100 NVL",
+      "memoryTotal": "100485038080",
+      "cudaCores": 16896,
+      "architecture": "Hopper",
+      "uuid": "GPU-b4f56614-7185-0fe4-9162-32fcdb2694f5"
+    },
+    {
+      "name": "NVIDIA H100 NVL",
+      "memoryTotal": "100485038080",
+      "cudaCores": 16896,
+      "architecture": "Hopper",
+      "uuid": "GPU-d7c54969-67be-a9fd-ea01-d19e455fa6cb"
+    }
+  ],
+  "cudaVersion": "13.2",
+  "writerId": "dsnyzjducaun0dpuwnhhk94yfk0eqeka"
+}
